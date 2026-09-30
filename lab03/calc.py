@@ -10,3 +10,5 @@ if b != 0:
     print('a / b =', a / b)
 else:
     print('a / b = Error: Division by zero')
+
+print('a / b =', a / b)
