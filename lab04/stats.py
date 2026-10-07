@@ -5,12 +5,12 @@ def parse_record(line: str) -> dict:
         raise ValueError("Строка должна содержать ровно три поля, разделенных ';'")
     
     city, temperature_str, date = fields
-    temperature_str = temperature_str.replace(",", ".")
-    temperature_str = temperature_str.replace("—", "-").replace("–", "-").replace("−", "-")
 
     city = fields[0].strip()
     temperature_str = fields[1].strip()
     date = fields[2].strip()
+    
+    temperature_str = temperature_str.replace(",", ".")
 
     if not city.strip() or not date.strip():
         raise ValueError("Название города и дата не могут быть пустыми")
