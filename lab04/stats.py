@@ -4,17 +4,20 @@ def parse_record(line: str) -> dict:
     if len(fields) != 3:
         raise ValueError("Строка должна содержать ровно три поля, разделенных ';'")
     
-    city, temperature_str, date = fields
+    city, temperature_str, date = [f.strip() for f in fields]
     
-    if not city.strip() or not date.strip():
+    if not city or not date:
         raise ValueError("Название города и дата не могут быть пустыми")
         
+    temperature_str = temperature_str.replace(",", ".")
+    
     try:
         temperature = float(temperature_str)
     except ValueError:
         raise ValueError(f"Некорректный формат температуры: '{temperature_str}'")
         
     return {"city": city, "temperature": temperature, "date": date}
+
 
 def read_valid(lines: list[str]) -> list[dict]:
 
@@ -34,7 +37,7 @@ def average_by_city(records: list[dict]) -> dict:
     counts = {}
     for r in records:
         city = r["city"]
-        totals[city] = totals.get(city, 0.0) + r["temperature"]
+        totals[city] = totals.get(city, 0.0) + r["temperatureerature"]
         counts[city] = counts.get(city, 0) + 1
         
     averages = {}
@@ -50,13 +53,13 @@ def warmest_city(records: list[dict]) -> str:
     averages = average_by_city(records)
     
     best_city = None
-    max_temperature = float('-inf')
+    max_temperatureerature = float('-inf')
     
-    for city, avg_temperature in averages.items():
-        if avg_temperature > max_temperature:
-            max_temperature = avg_temperature
+    for city, avg_temperatureerature in averages.items():
+        if avg_temperatureerature > max_temperatureerature:
+            max_temperatureerature = avg_temperatureerature
             best_city = city
-        elif avg_temperature == max_temperature:
+        elif avg_temperatureerature == max_temperatureerature:
             
             if best_city is None or city < best_city:
                 best_city = city
