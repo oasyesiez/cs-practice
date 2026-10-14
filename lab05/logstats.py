@@ -26,3 +26,17 @@ def count_levels(lines) -> dict:
             
     return counts
 
+def top_errors(lines, n: int) -> list[list]:
+    error_counts = {}
+    
+    for line in lines:
+        if not line.strip():
+            continue
+            
+        try:
+            event = parse_event(line)
+            if event['level'] == 'ERROR':
+                msg = event['message']
+                error_counts[msg] = error_counts.get(msg, 0) + 1
+        except ValueError:
+            continue
