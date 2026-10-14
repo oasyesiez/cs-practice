@@ -18,15 +18,7 @@ def parse_event(line: str) -> dict:
 
 
 def count_levels(lines) -> dict:
-    
-    
-    counts = {
-        'BROKEN': 0,
-        'DEBUG': 0,
-        'ERROR': 0,
-        'INFO': 0,
-        'WARNING': 0
-    }
+    counts = {}
     
     for line in lines:
         
@@ -35,11 +27,19 @@ def count_levels(lines) -> dict:
             
         try:
             event = parse_event(line)
-            counts[event['level']] += 1
+            level = event['level']
+            
+            if level not in counts:
+                counts[level] = 0
+            counts[level] += 1
         except ValueError:
+            
+            if 'BROKEN' not in counts:
+                counts['BROKEN'] = 0
             counts['BROKEN'] += 1
             
     return counts
+
 
 
 def top_errors(lines, n: int) -> list[list]:
