@@ -18,3 +18,10 @@ def deepest_path(paths):
             deepest_path = line
     return deepest_path
 
+def human_size(n_bytes: int):
+    for unit in ['Б', 'КБ', 'МБ', 'ГБ']:
+        if n_bytes < 1024:
+            return f"{n_bytes:.1f} {unit}".replace(".0 ", " ")
+        n_bytes /= 1024
+    return f"{n_bytes:.1f} ТБ"
+print(human_size(1536))
