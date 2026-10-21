@@ -1,11 +1,15 @@
 def count_by_extension(paths):
     totals = {}
     for line in paths:
-        line = line.split('.')
-        if len(line) < 2:
+        if line.startswith('.') and line.count('.') == 1:
             key = ''
         else:
-            key = line[-1].lower()
+            parts = line.split('.')
+            if len(parts) < 2:
+                key = ''
+            else:
+                key = parts[-1].lower()
+                
         totals[key] = totals.get(key, 0) + 1
     return totals
 
@@ -21,7 +25,7 @@ def deepest_path(paths):
 def human_size(n_bytes: int):
     for unit in ['Б', 'КБ', 'МБ', 'ГБ']:
         if n_bytes < 1024:
-            return f"{n_bytes:.1f} {unit}".replace(".0 ", " ")
+            return f"{n_bytes:.1f} {unit}"
         n_bytes /= 1024
     return f"{n_bytes:.1f} ТБ"
-print(human_size(1536))
+
