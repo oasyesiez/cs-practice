@@ -26,6 +26,7 @@ def human_size(n_bytes: int):
     if n_bytes < 1024:
         return f"{n_bytes} Б"
     else:
+        n_bytes /= 1024
         for unit in ['КБ', 'МБ', 'ГБ']:
             if n_bytes < 1024:
                 return f"{n_bytes:.1f} {unit}"
