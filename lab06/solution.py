@@ -8,3 +8,13 @@ def count_by_extension(paths):
             key = line[-1].lower()
         totals[key] = totals.get(key, 0) + 1
     return totals
+
+def deepest_path(paths):
+    deepest_path = ''
+    c = 0
+    for line in paths:
+        if line.count('/') > c:
+            c = line.count('/')
+            deepest_path = line
+    return deepest_path
+
