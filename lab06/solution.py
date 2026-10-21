@@ -23,8 +23,10 @@ def deepest_path(paths):
     return deepest_path
 
 def human_size(n_bytes: int):
-    for unit in ['Б', 'КБ', 'МБ', 'ГБ']:
+    if n_bytes < 1024:
+        return f"{n_bytes} Б"
+    for unit in ['КБ', 'МБ', 'ГБ']:
         if n_bytes < 1024:
             return f"{n_bytes:.1f} {unit}"
         n_bytes /= 1024
-    return f"{n_bytes:.1f} ТБ"
+    
