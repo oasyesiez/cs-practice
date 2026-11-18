@@ -1,6 +1,4 @@
 import json
-
-
 def csv_to_records(text: str) -> list[dict]:
     lines = [line for line in text.strip().splitlines() if line.strip()]
     if not lines:
@@ -43,7 +41,8 @@ def parse_settings(lines: list[str]) -> dict:
     current_list_key = None
 
     for raw_line in lines:
-        line = raw_line.split("#", 1)[0].rstrip()
+        before_comment, _, _ = raw_line.partition("#")
+        line = before_comment.rstrip()
         if not line.strip():
             continue
 
