@@ -1,14 +1,16 @@
 import json
+
+
 def csv_to_records(text: str) -> list[dict]:
     lines = [line for line in text.strip().splitlines() if line.strip()]
     if not lines:
         return []
 
-    headers = lines.split(",")
+    headers = [h.strip() for h in lines[0].split(",")]
     records = []
 
     for line in lines[1:]:
-        values = line.split(",")
+        values = [v.strip() for v in line.split(",")]
         records.append(dict(zip(headers, values)))
 
     return records
@@ -41,7 +43,7 @@ def parse_settings(lines: list[str]) -> dict:
     current_list_key = None
 
     for raw_line in lines:
-        line = raw_line.split("#", 1).rstrip()
+        line = raw_line.split("#", 1)[0].rstrip()
         if not line.strip():
             continue
 
