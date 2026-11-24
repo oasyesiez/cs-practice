@@ -26,5 +26,5 @@ def cap_above(values, limit):
     return capped_values.tolist()
 
 def celsius_to_fahrenheit(celsius):
-    fahrenheit = (celsius * 9/5) + 32
+    fahrenheit = (np.array(celsius) * 9/5) + 32
     return fahrenheit.tolist()
