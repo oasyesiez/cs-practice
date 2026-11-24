@@ -15,13 +15,13 @@ def vector_report(values):
     return dict_report
 
 def change_vector(values):
-    changed_values = values.copy()
+    changed_values = np.array(values, copy=True)
     changed_values[2:5] = 99
     changed_values[::2] = -1
     return changed_values.tolist()
 
 def cap_above(values, limit):
-    capped_values = values.copy()
+    capped_values = np.array(values, copy=True)
     capped_values[capped_values > limit] = limit
     return capped_values.tolist()
 
